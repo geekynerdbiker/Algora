@@ -15,7 +15,7 @@ public class Main {
         @Override
         public int compareTo(Node o) {
             return this.cost - o.cost;
-        }
+        } 
     }
 
     static PriorityQueue<Integer> [] dq;
