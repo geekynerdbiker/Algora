@@ -12,21 +12,21 @@ public class Main {
         char[] token = br.readLine().toCharArray();
         for (int i = 0; i < s.length; i++) doc.add(s[i]);
 
+        if (s.length < token.length) {
+            System.out.println(0);
+            return;
+        }
+
         int count = 0;
-        for (int i = 0, j = 0; i < doc.size(); ) {
-            if (doc.get(i) != token[j]) {
-                i++;
-                j = 0;
-                continue;
+        for (int i = 0; i < doc.size() - token.length + 1; i++) {
+            for (int j = 0; j < token.length; j++) {
+                if (doc.get(i + j) != token[j]) break;
+
+                if (j == token.length - 1) {
+                    count++;
+                    i += token.length - 1;
+                }
             }
-            if (j == token.length - 1) {
-                count++;
-                i++;
-                j = 0;
-                continue;
-            }
-            i++;
-            j++;
         }
 
         System.out.println(count);
