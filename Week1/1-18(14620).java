@@ -5,6 +5,7 @@ public class Main {
     private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
+    public static int sum, min = 3000;
     public static int[][] price;
     public static boolean[][] visited;
 
@@ -19,19 +20,17 @@ public class Main {
                 price[i][j] = Integer.parseInt(st.nextToken());
         }
         for (int x = 1; x < N - 1; x++)
-            for (int y = 1; y < N - 1; y++)
+            for (int y = 1; y < N - 1; y++) {
+                sum = 0;
                 DFS(x, y, 0, N);
+            }
+
+        System.out.print(min);
     }
 
     static void DFS(int x, int y, int seed, int N) {
         int[] dirX = {0, 0, 1, -1};
         int[] dirY = {1, -1, 0, 0};
-
-        if (seed == 3) {
-            print();
-            System.out.println();
-            return;
-        }
 
         boolean plantable = true;
         for (int i = 0; i < 4; i++) {
@@ -53,8 +52,14 @@ public class Main {
         else return;
 
         for (int nextX = 1; nextX < N - 1; nextX++)
-            for (int nextY = 1; nextY < N - 1; nextY++)
-        DFS(nextX, nextY, seed + 1, N);
+            for (int nextY = 1; nextY < N - 1; nextY++) {
+                if (seed == 2) {
+                    int sum = calc();
+                    if (min >= sum) min = sum;
+                    break;
+                }
+                DFS(nextX, nextY, seed + 1, N);
+            }
 
         if (plantable)
             for (int dir = 0; dir < 4; dir++) {
@@ -72,12 +77,12 @@ public class Main {
         return true;
     }
 
-    static void print() {
-        for (int i = 0; i < visited.length; i++) {
-            System.out.println();
-            for (int j = 0; j < visited.length; j++)
-                if (visited[i][j]) System.out.print(1);
-                else System.out.print(0);
-        }
+    static int calc() {
+        int sum = 0;
+        for (int i = 0; i < price.length; i++)
+            for (int j = 0; j < price.length; j++)
+                if (visited[i][j]) sum += price[i][j];
+
+        return sum;
     }
 }
