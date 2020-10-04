@@ -39,6 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget logo(BuildContext context) {
+    // position of logo
     return Container(
       decoration: BoxDecoration(border: Border.all(color: Colors.black)),
       margin: EdgeInsets.all(40),
