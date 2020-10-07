@@ -1,19 +1,20 @@
-#include <iostream>
-#include <cmath>
+import java.io.*;
+import java.math.BigInteger;
 
-int main(int argc, const char * argv[]) {
-        unsigned long long N;
-        int k = 64;
+public class Main {
+    private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        std::cin >> N;
+    public static void main(String[] args) throws IOException {
+        BigInteger N = new BigInteger(br.readLine());
+        BigInteger x = new BigInteger("18446744073709551616");
 
-        while(N != 0) {
-        unsigned long long x = pow(2,k) -1;
-        if( N == x-1) break;
-        k--;
-        N /=2;
+        for(int k = 64; !N.equals(BigInteger.ZERO); k--) {
+            if (N.equals(x.subtract(BigInteger.ONE))) {
+                System.out.print(k);
+                break;
+            }
+            N = N.divide(BigInteger.TWO);
+            x = x.divide(BigInteger.TWO);
         }
-
-        std::cout << k << '\n';
-        return 0;
-        }
+    }
+}
