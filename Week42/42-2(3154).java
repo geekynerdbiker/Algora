@@ -46,7 +46,6 @@ public class Main {
 
         return calEffort(dial[digit[0]], dial[digit[1]], dial[digit[2]], dial[digit[3]]);
     }
-
     public static int calEffort(int[] dial1, int[] dial2, int[] dial3, int[] dial4) {
         int sum1 = Math.abs(dial1[0] - dial2[0]) + Math.abs(dial1[1] - dial2[1]);
         int sum2 = Math.abs(dial2[0] - dial3[0]) + Math.abs(dial2[1] - dial3[1]);
