@@ -1,4 +1,4 @@
-package com.example.algora_mobile
+package com.example.algora_demo
 
 import io.flutter.embedding.android.FlutterActivity
 

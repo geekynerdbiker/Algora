@@ -1,4 +1,4 @@
-# algora_mobile
+# algora_demo
 
 A new Flutter project.
 

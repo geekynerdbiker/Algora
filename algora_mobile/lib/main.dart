@@ -1,149 +1,150 @@
 import 'package:flutter/material.dart';
-
+import 'package:algora_demo/Login/loginPage.dart';
 void main() {
-  runApp(MyApp());
+  runApp(LoginPage());
 }
 
-class MyApp extends StatelessWidget {
+class UserPage extends StatelessWidget {
+  final appTitle = 'Drawer Demo';
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: MyHomePage(),
+      title: appTitle,
+      home: UserPageW(title: appTitle),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
+class UserPageW extends StatelessWidget {
+  final String title;
 
-class _MyHomePageState extends State<MyHomePage> {
+  UserPageW({Key key, this.title}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.deepPurple,
+        title: Text('ALGORA'),
+        centerTitle: true,
+        toolbarHeight: 70,
+        actions: <Widget>[
+          IconButton(
+              icon: const Icon(Icons.notifications, size: 30),
+              tooltip: 'Show Snackbar',
+              onPressed: () {
+                noticeDialog(context);
+              }),
+          IconButton(
+            icon: const Icon(Icons.person, size: 30),
+            tooltip: 'Next page',
+            onPressed: () {},
+          ),
+        ],
+      ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+          child: ListView(
+        scrollDirection: Axis.horizontal,
+      )),
+      drawer: Drawer(
+        // Add a ListView to the drawer. This ensures the user can scroll
+        // through the options in the drawer if there isn't enough vertical
+        // space to fit everything.
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
           children: <Widget>[
-            logo(context),
-            IDPW(context),
-            helpCenter(context),
-            Container(height: 20),
-            loginButtons(context),
+            Container(
+              height: 100,
+              child: DrawerHeader(
+                child: Text(
+                  'Algora',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.deepPurple,
+                ),
+              ),
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.brightness_1,
+                size: 12,
+                color: Colors.deepPurpleAccent,
+              ),
+              title: Text('스코어 보드'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.brightness_1,
+                  size: 12, color: Colors.deepPurpleAccent),
+              title: Text('질문 게시판'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.brightness_1,
+                  size: 12, color: Colors.deepPurpleAccent),
+              title: Text('알고라 일정'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.brightness_1,
+                  size: 12, color: Colors.deepPurpleAccent),
+              title: Text('알고라 투표'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.local_grocery_store,
+                  size: 20, color: Colors.pinkAccent),
+              title: Text('상점'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.pop(context);
+              },
+            ),
           ],
         ),
       ),
     );
   }
+}
 
-  Widget logo(BuildContext context) {
-    // position of logo
-    return Container(
-      decoration: BoxDecoration(border: Border.all(color: Colors.black)),
-      margin: EdgeInsets.all(40),
-      height: MediaQuery.of(context).size.width * 0.5,
-    );
-  }
-  Widget IDPW(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          decoration: BoxDecoration(border: Border.all(color: Colors.black)),
-          width: MediaQuery.of(context).size.width * 0.8,
-          height: 50,
-          margin: EdgeInsets.symmetric(vertical: 10),
-        ),
-        Container(
-          decoration: BoxDecoration(border: Border.all(color: Colors.black)),
-          width: MediaQuery.of(context).size.width * 0.8,
-          height: 50,
-          margin: EdgeInsets.symmetric(vertical: 10),
-        ),
-      ],
-    );
-  }
-
-  Widget helpCenter(BuildContext context) {
-    return Text('회원가입 | 아이디 찾기 | 비밀번호 찾기', style: TextStyle(color: Colors.grey, fontSize: 13),);
-  }
-
-  Widget loginButtons(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Container(
-          color: Colors.black,
-          width: MediaQuery.of(context).size.width * 0.8,
-          height: 40,
-          margin: EdgeInsets.symmetric(vertical: 10),
-          child: Center(
-            child: Text(
-              '로그인',
-              style: TextStyle(color: Colors.white, fontSize: 16),
-            ),
+void noticeDialog(BuildContext context) {
+  showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: new Container(
+              height: 350,
+              width: 200,
           ),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              color: Colors.black,
-              width: MediaQuery.of(context).size.width * 0.38,
-              height: 40,
-              margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-              child: Center(
-                child: Text(
-                  '소셜 로그인 1',
-                  style: TextStyle(color: Colors.white, fontSize: 16),
-                ),
-              ),
-            ),
-            Container(
-              color: Colors.black,
-              width: MediaQuery.of(context).size.width * 0.38,
-              height: 40,
-              margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-              child: Center(
-                child: Text(
-                  '소셜 로그인 2',
-                  style: TextStyle(color: Colors.white, fontSize: 16),
-                ),
-              ),
-            ),
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              color: Colors.black,
-              width: MediaQuery.of(context).size.width * 0.38,
-              height: 40,
-              margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-              child: Center(
-                child: Text(
-                  '소셜 로그인 3',
-                  style: TextStyle(color: Colors.white, fontSize: 16),
-                ),
-              ),
-            ),
-            Container(
-              color: Colors.black,
-              width: MediaQuery.of(context).size.width * 0.38,
-              height: 40,
-              margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-              child: Center(
-                child: Text(
-                  '소셜 로그인 4',
-                  style: TextStyle(color: Colors.white, fontSize: 16),
-                ),
-              ),
-            ),
-          ],
-        )
-      ],
-    );
-  }
+        );
+      });
 }
